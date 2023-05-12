@@ -1,0 +1,13 @@
+# For rendering
+glcontext
+moderngl
+PyOpenGL
+
+# Others
+jupyter
+pillow
+opencv-python
+trimesh
+torch
+matplotlib
+numpy
