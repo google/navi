@@ -88,6 +88,7 @@ tar -xzf navi.tar.gz
 ## Clone the code and use the dataset.
 
 ```bash
+git clone https://github.com/google/navi
 cd navi-dataset
 ```
 
