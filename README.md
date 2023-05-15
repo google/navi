@@ -1,6 +1,9 @@
-# NAVI Dataset.
+This is not an officially supported Google product.
 
-This repo contains a tutorial about how to use the NAVI dataset.
+# NAVI: Category-Agnostic Image Collections with High-Quality 3D Shape and Pose Annotations
+### [Project Page](https://navidataset.github.io/) | [Paper](https://arxiv.org/)
+
+This repo contains a tutorial about how to download and use the NAVI dataset.
 
 ## Overview of dataset contents.
 
@@ -108,3 +111,43 @@ Start Jupyter:
 jupyter notebook --no-browser
 ```
 
+
+## Training and validation splits
+
+We have released the common train/val splits in the json files.
+In these splits, approximately 80% of the data under each folder was selected
+for the train set, and 20% for the validation set.
+
+Some tasks that are described in the paper have different setups, and require
+different splits. We provide the splits that we used for these tasks. 
+
+#### For 3D from a single image
+For single-image 3D, there is the possibility to train and test a method on
+different sets of object shapes. In that case, please use the object splits
+provided under
+`/path/to/navi/custom_splits/single_image_3d/objects-{train, val}.txt`.
+
+In any other case, please use the default 80-20 splits of the json files.
+
+#### For Pairwise pixel correspondence (sparse and dense)
+Pairwise correspondences are evaluated on pairs of images.
+We provide those under
+`custom_splits/pairwise_pixel_correspondences/pairs-{multiview, wild_set}.txt`.
+
+Each row is formatted as:
+`image_1 image_2 angular_distance_of_cameras`
+The angular distance is given in degrees, from 0 to 180.
+
+
+## Citation
+
+```
+If you find this dataset useful, please consider citing our work:
+@article{jampani2023navi,
+  title={NAVI: Category-Agnostic Image Collections with High-Quality 3D Shape and Pose Annotations},
+  author={Jampani, Varun and Maninis, Kevis-Kokitsi and Engelhardt, Andreas and Truong, Karen and Karpur, Arjun and Sargent, Kyle and Popov, Stefan and Araujo, Andre and Martin-Brualla, Ricardo and Patel, Kaushal and Vlasic, Daniel and Ferrari, Vittorio and Makadia, Ameesh and Liu, Ce and Li, Yuanzhen and Zhou, Howard},
+  booktitle={arXiv preprint},
+  url={https://navidataset.github.io/},
+  year={2023}
+}
+```
