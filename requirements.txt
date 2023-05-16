@@ -11,3 +11,4 @@ trimesh
 torch
 matplotlib
 numpy
+colour

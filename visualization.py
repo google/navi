@@ -22,7 +22,7 @@ import logging
 import typing
 
 import matplotlib
-import matplotlib.cm as cm
+from matplotlib import cm
 import numpy as np
 import PIL.Image
 import trimesh
@@ -158,8 +158,8 @@ def prepare_mesh_rendering_info(
 
   triangles = data_util.convert_to_triangles(
       np.array(mesh.vertices), np.array(mesh.faces))
-  triangle_colors = None
-  material_ids = None
+  triangle_colors = t.tensor([[0.8] * 3])
+  material_ids = t.tensor([0] * len(triangles), dtype=t.int32)
   if with_texture and hasattr(mesh.visual, 'to_color'):
     visuals = mesh.visual.to_color()
     vertex_colors = t.tensor(
@@ -201,7 +201,10 @@ def overlay_images(image_1: np.ndarray, image_2: np.ndarray,
       opacity * image_2[mask, :] + (1 - opacity) * image_1[mask, :])
   return result
 
-def apply_colors_to_depth_map(depth, minn=None, maxx=None):
+def apply_colors_to_depth_map(
+    depth: np.ndarray, minn: typing.Optional[int] = None,
+    maxx: typing.Optional[int] = None) -> np.ndarray:
+  """Converts a depth map to an RGB image."""
   mask = (depth != 0.)
   if minn is None:
     minn = depth[mask].min()

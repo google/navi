@@ -15,7 +15,10 @@
 # Author: kmaninis@google.com (Kevis-Kokitsi Maninis)
 """Useful functions for interfacing NAVI data."""
 
-from typing import Text
+import json
+import os
+import trimesh
+from typing import Text, Optional
 import numpy as np
 from PIL import Image
 from PIL import ImageOps
@@ -75,3 +78,39 @@ def camera_matrices_from_annotation(annotation):
   intrinsics = transformations.gl_projection_matrix_from_intrinsics(
       w, h, focal_length_pixels, focal_length_pixels, w//2, h//2, zfar=1000)
   return object_to_world, intrinsics
+
+
+def load_scene_data(query: str, navi_release_root: str,
+    max_num_images: Optional[int] = None):
+  """Loads the data of a certain scene from a query."""
+  query_data = query.split(':')
+  if len(query_data) == 3:
+    object_id, scene_name, camera_model = query_data
+    scene = f'{scene_name}_{camera_model}'
+  elif len(query_data) == 2:
+    object_id, scene_name = query_data
+    scene = scene_name
+    assert scene_name == 'wild_set'
+  else:
+    raise ValueError(f'Query {query} is not valid.')
+
+  annotation_json_path = os.path.join(
+      navi_release_root, object_id, scene,
+      'annotations.json')
+  with open(annotation_json_path, 'r') as f:
+    annotations = json.load(f)
+
+  # Load the 3D mesh.
+  mesh_path = os.path.join(
+      navi_release_root, object_id, '3d_scan', f'{object_id}.obj')
+  mesh = trimesh.load(mesh_path)
+
+  # Load the images.
+  images = []
+  for i_anno, anno in enumerate(annotations):
+    if max_num_images is not None and i_anno >=max_num_images:
+      break
+    image_path = os.path.join(
+        navi_release_root, object_id, scene, 'images', anno['filename'])
+    images.append(read_image(image_path))
+  return annotations, mesh, images
