@@ -85,7 +85,7 @@ Each of the `annotations.json` contains the following information.
 wget http://storage.googleapis.com/gresearch/navi-dataset/navi_v1.tar.gz
 
 # Extract
-tar -xzf navi.tar.gz
+tar -xzf navi_v1.tar.gz
 ```
 
 ## Clone the code and use the dataset.
