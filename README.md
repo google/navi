@@ -1,7 +1,7 @@
 This is not an officially supported Google product.
 
 # NAVI: Category-Agnostic Image Collections with High-Quality 3D Shape and Pose Annotations
-### [Project Page](https://navidataset.github.io/) | [Paper](https://arxiv.org/)
+### [Project Page](https://navidataset.github.io/)
 
 This repo contains a tutorial about how to download and use the NAVI dataset.
 
@@ -82,7 +82,7 @@ Each of the `annotations.json` contains the following information.
 
 ```bash
 # Download
-wget http://storage.googleapis.com/gresearch/navi-dataset/v1/navi.tar.gz
+wget http://storage.googleapis.com/gresearch/navi-dataset/navi_v1.tar.gz
 
 # Extract
 tar -xzf navi.tar.gz
@@ -92,7 +92,7 @@ tar -xzf navi.tar.gz
 
 ```bash
 git clone https://github.com/google/navi
-cd navi-dataset
+cd navi
 ```
 
 ### Use the dataset
