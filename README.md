@@ -1,7 +1,7 @@
 This is not an officially supported Google product.
 
 # NAVI: Category-Agnostic Image Collections with High-Quality 3D Shape and Pose Annotations
-### [Project Page](https://navidataset.github.io/)
+### [Project Page](https://navidataset.github.io/) | [All objects](https://docs.google.com/presentation/d/1LCWUBQHs3oGi1bwCQjgLm8-etV9Y8ldPSpFN0BLoi6o/)
 
 This repo contains a tutorial about how to download and use the NAVI dataset.
 
