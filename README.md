@@ -141,8 +141,8 @@ The angular distance is given in degrees, from 0 to 180.
 
 ## Citation
 
-```
 If you find this dataset useful, please consider citing our work:
+```
 @inproceedings{jampani2023navi,
   title={{NAVI}: Category-Agnostic Image Collections with High-Quality 3D Shape and Pose Annotations},
   author={Jampani, Varun and Maninis, Kevis-Kokitsi and Engelhardt, Andreas and Truong, Karen and Karpur, Arjun and Sargent, Kyle and Popov, Stefan and Araujo, Andre and Martin-Brualla, Ricardo and Patel, Kaushal and Vlasic, Daniel and Ferrari, Vittorio and Makadia, Ameesh and Liu, Ce and Li, Yuanzhen and Zhou, Howard},
