@@ -19,6 +19,7 @@ import json
 import os
 import trimesh
 from typing import Text, Optional
+import mediapy as media
 import numpy as np
 from PIL import Image
 from PIL import ImageOps
@@ -81,12 +82,18 @@ def camera_matrices_from_annotation(annotation):
 
 
 def load_scene_data(query: str, navi_release_root: str,
-    max_num_images: Optional[int] = None):
+    max_num_images: Optional[int] = None, load_video: bool = False):
   """Loads the data of a certain scene from a query."""
-  query_data = query.split(':')
-  if len(query_data) == 3:
-    object_id, scene_name, camera_model = query_data
-    scene = f'{scene_name}_{camera_model}'
+  query_data = query.split('-')
+  video_id = None
+  if len(query_data) == 5:
+    object_id, scene_type, scene_idx, camera_model, video_id = query_data
+    scene_name = f'{scene_type}-{scene_idx}'
+    scene = f'{scene_name}-{camera_model}-{video_id}'
+  elif len(query_data) == 4:
+    object_id, scene_type, scene_idx, camera_model = query_data
+    scene_name = f'{scene_type}-{scene_idx}'
+    scene = f'{scene_name}-{camera_model}'
   elif len(query_data) == 2:
     object_id, scene_name = query_data
     scene = scene_name
@@ -113,4 +120,11 @@ def load_scene_data(query: str, navi_release_root: str,
     image_path = os.path.join(
         navi_release_root, object_id, scene, 'images', anno['filename'])
     images.append(read_image(image_path))
-  return annotations, mesh, images
+
+  # Load the video, for video scenes.
+  video = None
+  if video_id and load_video:
+    video_path = os.path.join(
+        navi_release_root, object_id, scene, 'video.mp4')
+    video = media.read_video(video_path)
+  return annotations, mesh, images, video

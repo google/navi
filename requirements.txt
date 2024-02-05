@@ -12,3 +12,4 @@ torch
 matplotlib
 numpy
 colour
+mediapy
